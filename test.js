@@ -1,6 +1,8 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const assert = require('assert');
+const { runTaskTests } = require('./tests/taskTest.js');
+
 
 describe("Running Selenium Testing", async function () {
   it('Loading Selenium Webdriver', async function () {
@@ -18,13 +20,19 @@ describe("Running Selenium Testing", async function () {
         //console.log(result);
         let loginButton = await driver.findElement(By.css('button'));
         loginButton.click();
-        describe('Selenium Test 1', function () {
-          it('should return -1 when the value is not present 2', function () {
-            console.log("Mocha should be loaded inside selenium");
-            assert.equal([1, 2, 3].indexOf(4), -1);
+        //await driver.wait()
+        await driver.wait(until.titleIs('Tasks | Habitica'));
+        describe('Testing that login worked correctly', function() {
+          it('Url should be the home page now', async function() {
+            let currUrl = await driver.getCurrentUrl();
+            assert.equal(currUrl, "http://localhost:8080/");
+          })
+        });
+        describe('Example Test Case', function () {
+          it('Test Case 1', function () {
+            assert.equal([1, 2, 3].indexOf(1), 0);
           });
-          it('should return -1 when the value is not present 3', function () {
-            console.log("Mocha should be loaded inside selenium");
+          it('Text Case 2', function () {
             assert.equal([1, 2, 3].indexOf(4), -1);
           });
         });
