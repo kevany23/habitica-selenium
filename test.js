@@ -5,14 +5,14 @@ const { runTaskTests } = require('./tests/taskTest.js');
 
 
 describe("Running Selenium Testing", async function () {
-  it('Loading Selenium Webdriver', async function () {
+  it('Loading Selenium Webdriver and logging in', async function () {
     this.timeout(100000);
     let driver = await new Builder().forBrowser('chrome').build();
     try {
       await driver.get('http://localhost:8080/login');
     } finally {
-      //await driver.quit();
       try {
+        // Login Here
         let usernameInput = await driver.findElement(By.id("usernameInput"));
         let result = usernameInput.sendKeys("seleniumTester");
         let passwordInput = await driver.findElement(By.id("passwordInput"));
@@ -20,14 +20,15 @@ describe("Running Selenium Testing", async function () {
         //console.log(result);
         let loginButton = await driver.findElement(By.css('button'));
         loginButton.click();
-        //await driver.wait()
+        // Wait for driver to load page
         await driver.wait(until.titleIs('Tasks | Habitica'));
         describe('Testing that login worked correctly', function() {
           it('Url should be the home page now', async function() {
             let currUrl = await driver.getCurrentUrl();
-            assert.equal(currUrl, "http://localhost:8080/");
+            assert.equal(currUrl, "http://localhost:8080/", "Correct Site");
           })
         });
+        runTaskTests(driver);
         describe('Example Test Case', function () {
           it('Test Case 1', function () {
             assert.equal([1, 2, 3].indexOf(1), 0);
@@ -45,7 +46,3 @@ describe("Running Selenium Testing", async function () {
   });
 }
 );
-
-describe('#indexOf()', function () {
-
-});
