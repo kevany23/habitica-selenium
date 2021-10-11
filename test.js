@@ -2,6 +2,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const assert = require('assert');
 const { runTaskTests } = require('./tests/taskTest.js');
+const { runInventoryTests } = require('./tests/inventoryTest.js');
 
 
 describe("Running Selenium Testing", async function () {
@@ -28,7 +29,14 @@ describe("Running Selenium Testing", async function () {
             assert.equal(currUrl, "http://localhost:8080/", "Correct Site");
           })
         });
-        runTaskTests(driver);
+        let t1 = await runTaskTests(driver);
+        // For some reason if I just call runInventoryTests(),
+        // it loads the pages before task tests finish
+        describe('Inventory Test', function() {
+          it('Calling Inventory Tests', async function() {
+            runInventoryTests(driver);
+          })
+        })
         describe('Example Test Case', function () {
           it('Test Case 1', function () {
             assert.equal([1, 2, 3].indexOf(1), 0);

@@ -65,8 +65,11 @@ var runTaskTests = function(driver) {
           );
           // click here works
           await dailyCheckbox.click();
+          this.timeout(1000);
           // Check the functionality
           let currExp = await getExp();
+          // exp diff is inconsistent
+          // NOTE this test is inconsistent
           assert.equal(currExp, initialExp + 6,
             'Checking if exp updates properly');
           

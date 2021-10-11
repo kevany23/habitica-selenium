@@ -4,7 +4,7 @@
 To set up the project, you will need to install Selenium Webdriver, specifically Chromedriver.
 
 ## Running the tests
-Haibitca must be running locally first (See Habitica repo)
+Haibitca must be running locally first (See Habitica repo)\
 `npm test`
 
 ## Manual setups
