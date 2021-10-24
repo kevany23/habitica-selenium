@@ -65,7 +65,7 @@ var runTaskTests = function(driver) {
           );
           // click here works
           await dailyCheckbox.click();
-          this.timeout(1000);
+          //this.timeout(1000);
           // Check the functionality
           let currExp = await getExp();
           // exp diff is inconsistent
@@ -92,21 +92,6 @@ var runTaskTests = function(driver) {
           // For now just check if it decreases health
           assert.equal(currHealth < startHealth , true);
         })
-      });
-      /**
-       * Rewards tests are here since rewards are on the same page
-       */
-      describe('Testing Rewards Section', function() {
-        it('Checking reward purchase', async function() {
-          // It seems like notification elements are blocking this element
-          /*let customReward = await driver.findElement(
-            By.xpath(
-              "//div[contains(@class, 'reward-control')]//div[contains(@class, 'icon-text')]"
-            )
-          );
-          await customReward.click();
-          */
-        });
       });
     });
   });

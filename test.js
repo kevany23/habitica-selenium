@@ -3,6 +3,7 @@ const { SeleniumServer } = require('selenium-webdriver/remote');
 const assert = require('assert');
 const { runTaskTests } = require('./tests/taskTest.js');
 const { runInventoryTests } = require('./tests/inventoryTest.js');
+const { runRewardTests } = require('./tests/rewardTest.js');
 
 
 describe("Running Selenium Testing", async function () {
@@ -36,7 +37,13 @@ describe("Running Selenium Testing", async function () {
           it('Calling Inventory Tests', async function() {
             runInventoryTests(driver);
           })
-        })
+        });
+
+        describe('Reward Tests', function() {
+          it('Calling Reward Tests', async function() {
+            runRewardTests(driver);
+          })
+        });
       }
       catch (err) {
         console.log("ERROR IN TESTING");
