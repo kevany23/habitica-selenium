@@ -37,14 +37,6 @@ describe("Running Selenium Testing", async function () {
             runInventoryTests(driver);
           })
         })
-        describe('Example Test Case', function () {
-          it('Test Case 1', function () {
-            assert.equal([1, 2, 3].indexOf(1), 0);
-          });
-          it('Text Case 2', function () {
-            assert.equal([1, 2, 3].indexOf(4), -1);
-          });
-        });
       }
       catch (err) {
         console.log("ERROR IN TESTING");
