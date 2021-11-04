@@ -4,7 +4,7 @@ const assert = require('assert');
 
 var runRewardTests = async function(driver) {
   describe('Now Running tests on rewardTest.js', function() {
-    this.timeout(100000);
+    this.timeout(10000);
     it('Navigating back to Task Page', async function(){
       await driver.get('http://localhost:8080/');
     });

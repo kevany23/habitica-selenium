@@ -1,5 +1,6 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
+const { waitFunction } = require('../util/util');
 const assert = require('assert');
 
 var driver;
@@ -43,7 +44,8 @@ var runTaskTests = function(driver) {
           assert.equal(currHealth, 51);
         })
       });
-      describe('Now testing basic Task functionality', function() {
+      describe.only('Now testing basic Task functionality', function() {
+        this.timeout(10000);
         it('Starting with Basic Daily', async function() {
           // First get current EXP Level
           // Define function to get the element and value
@@ -65,14 +67,17 @@ var runTaskTests = function(driver) {
           );
           // click here works
           await dailyCheckbox.click();
+          await waitFunction(500);
           //this.timeout(1000);
           // Check the functionality
           let currExp = await getExp();
           // exp diff is inconsistent
           // Now currently checks if exp increased
+          // This test is flakey, it appears by adding code for waiting,
+          // the test is more stable
           assert.equal(currExp > initialExp, true,
             'Checking if exp updates properly');
-          
+          await waitFunction(100);
           // Revert the task completion
           await dailyCheckbox.click();
           currExp = await getExp();

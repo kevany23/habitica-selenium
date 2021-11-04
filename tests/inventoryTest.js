@@ -1,4 +1,4 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
+const { Builder, By, Key, until, WebDriver } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const assert = require('assert');
 
@@ -10,10 +10,11 @@ var runInventoryTests = async function(driver) {
       let currUrl = await driver.getCurrentUrl();
       assert.equal(currUrl, 'http://localhost:8080/inventory/equipment', 'URL test');
     });
-    it('Testing inventory/equipment functionality', async function() {
+    it('Testing inventory/equipment functionality with Sword', async function() {
+
       // Profile Div
       let profile = await driver.findElement(
-        By.className('avatar background_violet')
+        By.className('avatar background_blue')
       );
       await profile.click();
       let statsTab = await driver.findElement(
@@ -30,7 +31,6 @@ var runInventoryTests = async function(driver) {
       await driver.actions().sendKeys(Key.ESCAPE).perform();
       // Account is initially wielding sword
       // item-content shop_weapon_warrior_1
-      
       let swordElement = await driver.findElement(
         By.xpath(
           "//span[@class='item-content shop_weapon_warrior_1']" +
@@ -81,6 +81,39 @@ var runInventoryTests = async function(driver) {
       );
       await equipBtn.click();
     });
+    it('Testing equpping with armor', async function() {
+      // Leather armor is unequipped initially
+      // Check stats first
+      
+      let profile = await driver.findElement(
+        By.className('avatar background_blue')
+      );
+      await profile.click();
+      let statsTab = await driver.findElement(
+        By.xpath("//div[contains(text(), 'Stats')]")
+      );
+      await statsTab.click();
+      let consElement = await driver.findElement(
+        By.xpath(
+          "//div[@class='stat-title con']/following-sibling::strong[@class='number']"
+        )
+      );
+      let initialCons = await consElement.getText();
+      initialCons = parseInt(initialCons)
+      await driver.actions().sendKeys(Key.ESCAPE).perform();
+      
+
+      // Equip armor
+      let armorElement = await driver.findElement(
+        By.xpath(
+          "//span[@class='item-content shop_armor_warrior_1']"
+        )
+      );
+      //await driver.actions().move({origin: WebDriver.VIEWPORT, x: 0, y: -1500});
+      await armorElement.click();
+      
+
+    })
   })
 };
 

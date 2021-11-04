@@ -4,6 +4,7 @@ const assert = require('assert');
 const { runTaskTests } = require('./tests/taskTest.js');
 const { runInventoryTests } = require('./tests/inventoryTest.js');
 const { runRewardTests } = require('./tests/rewardTest.js');
+const { runTavernTests } = require('./tests/tavernTest.js');
 
 
 describe("Running Selenium Testing", async function () {
@@ -38,10 +39,16 @@ describe("Running Selenium Testing", async function () {
             runInventoryTests(driver);
           })
         });
-
+        
         describe('Reward Tests', function() {
           it('Calling Reward Tests', async function() {
             runRewardTests(driver);
+          })
+        });
+
+        describe('Tavern Tests', function() {
+          it('Calling Tavern Tests', async function() {
+            runTavernTests(driver);
           })
         });
       }
