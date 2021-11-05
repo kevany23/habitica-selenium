@@ -1,6 +1,10 @@
-const { Builder, By, Key, until, WebDriver } = require('selenium-webdriver');
+const { Builder, By, Key, until, WebDriver, Origin } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
+const { waitFunction, scrollToElement, clickByLocation } = require('../util/util');
 const assert = require('assert');
+
+// Use dependencies to determine ordering
+const { runTaskTests } = require('./taskTest.js');
 
 var runInventoryTests = async function(driver) {
   describe('Running tests in inventory page', function() {
@@ -101,16 +105,26 @@ var runInventoryTests = async function(driver) {
       let initialCons = await consElement.getText();
       initialCons = parseInt(initialCons)
       await driver.actions().sendKeys(Key.ESCAPE).perform();
-      
-
+      await waitFunction(200);
       // Equip armor
       let armorElement = await driver.findElement(
         By.xpath(
           "//span[@class='item-content shop_armor_warrior_1']"
         )
       );
-      //await driver.actions().move({origin: WebDriver.VIEWPORT, x: 0, y: -1500});
-      await armorElement.click();
+      // for some reason this element is very hard to click properly
+      scrollToElement(driver, armorElement);
+      let rect = await armorElement.getRect();
+      /*await driver.actions().move({
+        origin: armorElement,
+        x: rect.width / 2,
+        y: rect.height / 2
+      }).click().perform();*/
+      clickByLocation(driver, armorElement);
+      
+      // and we finally have the element clicked
+
+      
       
 
     })
