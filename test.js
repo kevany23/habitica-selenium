@@ -17,12 +17,12 @@ describe("Running Selenium Testing", async function () {
       try {
         // Login Here
         let usernameInput = await driver.findElement(By.id("usernameInput"));
-        let result = usernameInput.sendKeys("seleniumTester");
+        usernameInput.sendKeys("seleniumTester");
         let passwordInput = await driver.findElement(By.id("passwordInput"));
-        result = passwordInput.sendKeys("dropper_123");
-        //console.log(result);
+        passwordInput.sendKeys("dropper_123");
         let loginButton = await driver.findElement(By.css('button'));
         loginButton.click();
+
         // Wait for driver to load page
         await driver.wait(until.titleIs('Tasks | Habitica'));
         describe('Testing that login worked correctly', function() {
@@ -31,26 +31,10 @@ describe("Running Selenium Testing", async function () {
             assert.equal(currUrl, "http://localhost:8080/", "Correct Site");
           })
         });
-        let t1 = await runTaskTests(driver);
-        // For some reason if I just call runInventoryTests(),
-        // it loads the pages before task tests finish
-        describe('Inventory Test', function() {
-          it('Calling Inventory Tests', async function() {
-            runInventoryTests(driver);
-          })
-        });
-        
-        describe('Reward Tests', function() {
-          it('Calling Reward Tests', async function() {
-            runRewardTests(driver);
-          })
-        });
-
-        describe('Tavern Tests', function() {
-          it('Calling Tavern Tests', async function() {
-            runTavernTests(driver);
-          })
-        });
+        runTaskTests(driver);
+        runInventoryTests(driver);
+        runRewardTests(driver);
+        runTavernTests(driver);
       }
       catch (err) {
         console.log("ERROR IN TESTING");

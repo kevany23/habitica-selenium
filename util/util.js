@@ -30,8 +30,20 @@ var clickByLocation = async function(driver, element) {
   }).click().perform();
 }
 
+/**
+ * Natigates to the specified url if the browser hasn't
+ * Make sure the url ends with '/'
+ */
+var navigatePage = async function(driver, url) {
+  let currUrl = await driver.getCurrentUrl();
+  if (currUrl != url) {
+    await driver.get(url);
+  }
+}
+
 module.exports = {
   waitFunction: waitFunction,
   scrollToElement: scrollToElement,
-  clickByLocation, clickByLocation
+  clickByLocation: clickByLocation,
+  navigatePage: navigatePage
 }

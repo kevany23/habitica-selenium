@@ -1,21 +1,17 @@
 const { Builder, By, Key, until, WebDriver, Origin } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { waitFunction, scrollToElement, clickByLocation } = require('../util/util');
+const { waitFunction, scrollToElement, clickByLocation, navigatePage } = require('../util/util');
 const assert = require('assert');
 
-// Use dependencies to determine ordering
-const { runTaskTests } = require('./taskTest.js');
-
 var runInventoryTests = async function(driver) {
-  describe('Running tests in inventory page', function() {
-    this.timeout(100000);
-    it('Loading equipment page', async function() {
-      await driver.get('http://localhost:8080/inventory/equipment');
-      let currUrl = await driver.getCurrentUrl();
-      assert.equal(currUrl, 'http://localhost:8080/inventory/equipment', 'URL test');
+  describe('Inventory page tests in inventoryTest.js', function() {
+    this.timeout(10000);
+    beforeEach(function () {
+      navigatePage(driver, 'http://localhost:8080/inventory/equipment');
     });
     it('Testing inventory/equipment functionality with Sword', async function() {
-
+      // let page finish loading to avoid flakiness
+      await waitFunction(200);
       // Profile Div
       let profile = await driver.findElement(
         By.className('avatar background_blue')
@@ -114,16 +110,10 @@ var runInventoryTests = async function(driver) {
       );
       // for some reason this element is very hard to click properly
       scrollToElement(driver, armorElement);
-      let rect = await armorElement.getRect();
-      /*await driver.actions().move({
-        origin: armorElement,
-        x: rect.width / 2,
-        y: rect.height / 2
-      }).click().perform();*/
       clickByLocation(driver, armorElement);
-      
+      await waitFunction(400);
       // and we finally have the element clicked
-
+      await driver.actions().sendKeys(Key.ESCAPE).perform();
       
       
 
