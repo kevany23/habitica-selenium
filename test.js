@@ -5,6 +5,7 @@ const { runTaskTests } = require('./tests/taskTest.js');
 const { runInventoryTests } = require('./tests/inventoryTest.js');
 const { runRewardTests } = require('./tests/rewardTest.js');
 const { runTavernTests } = require('./tests/tavernTest.js');
+const { runGuildTests } = require('./tests/guildTest.js')
 
 
 describe("Running Selenium Testing", async function () {
@@ -25,14 +26,13 @@ describe("Running Selenium Testing", async function () {
 
         // Wait for driver to load page
         await driver.wait(until.titleIs('Tasks | Habitica'));
-        describe('Testing that login worked correctly', function() {
-          it('Url should be the home page now', async function() {
-            let currUrl = await driver.getCurrentUrl();
-            assert.equal(currUrl, "http://localhost:8080/", "Correct Site");
-          })
-        });
+        let currUrl = await driver.getCurrentUrl();
+        assert.equal(currUrl, "http://localhost:8080/", "Login did not work");
+
+        // Run all the tests here
         runTaskTests(driver);
         runInventoryTests(driver);
+        runGuildTests(driver);
         runRewardTests(driver);
         runTavernTests(driver);
       }
@@ -42,5 +42,4 @@ describe("Running Selenium Testing", async function () {
       }
     }
   });
-}
-);
+});

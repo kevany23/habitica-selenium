@@ -112,11 +112,44 @@ var runInventoryTests = async function(driver) {
       scrollToElement(driver, armorElement);
       clickByLocation(driver, armorElement);
       await waitFunction(400);
-      // and we finally have the element clicked
+      // now we finally have the element clicked
+      let equipBtn = await driver.findElement(
+        By.xpath(
+          "//span[contains(text(), 'Equip')]" +
+          "/ancestor::button[@class='btn with-icon mt-4 btn-primary']"
+        )
+      );
+      await equipBtn.click();
       await driver.actions().sendKeys(Key.ESCAPE).perform();
       
+      profile = await driver.findElement(
+        By.className('avatar background_blue')
+      );
+      await profile.click();
+      statsTab = await driver.findElement(
+        By.xpath("//div[contains(text(), 'Stats')]")
+      );
+      await statsTab.click();
+      consElement = await driver.findElement(
+        By.xpath(
+          "//div[@class='stat-title con']/following-sibling::strong[@class='number']"
+        )
+      );
+      let currCons = await consElement.getText();
+      await driver.actions().sendKeys(Key.ESCAPE).perform();
+      // assertion here
+      assert.equal(currCons, initialCons + 4);
+      scrollToElement(driver, armorElement);
+      clickByLocation(driver, armorElement);
+      await waitFunction(400);
+      let unequipBtn = await driver.findElement(
+        By.xpath(
+          "//span[contains(text(), 'Unequip')]" +
+          "/parent::button[@class='btn with-icon mt-4 btn-secondary']"
+        )
+      );
+      unequipBtn.click();
       
-
     })
   })
 };

@@ -9,3 +9,5 @@ Haibitca must be running locally first (See Habitica repo)\
 
 ## Manual setups
 To properly run the Selenium tests, some configurations must be made manually on the app.
+
+Create an account on the local instance.
