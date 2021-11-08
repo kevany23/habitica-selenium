@@ -1,5 +1,6 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
+const { Options } = require('selenium-webdriver/chrome');
 const assert = require('assert');
 const { runTaskTests } = require('./tests/taskTest.js');
 const { runInventoryTests } = require('./tests/inventoryTest.js');
@@ -13,7 +14,9 @@ const { runProfileTests } = require('./tests/profileTest.js');
 describe("Running Selenium Testing", async function () {
   it('Loading Selenium Webdriver and logging in', async function () {
     this.timeout(100000);
-    let driver = await new Builder().forBrowser('chrome').build();
+    let options = new Options();
+    options.addArguments('log-level=3');
+    let driver = await new Builder().forBrowser('chrome').withCapabilities(options).build();
     try {
       await driver.get('http://localhost:8080/login');
     } finally {
