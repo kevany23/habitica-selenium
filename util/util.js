@@ -32,7 +32,7 @@ var clickByLocation = async function(driver, element) {
 
 /**
  * Natigates to the specified url if the browser hasn't
- * Make sure the url ends with '/'
+ * Make sure the url ends with '/' if it's homepage
  */
 var navigatePage = async function(driver, url) {
   let currUrl = await driver.getCurrentUrl();
@@ -41,9 +41,20 @@ var navigatePage = async function(driver, url) {
   }
 }
 
+/**
+ * Generate a random message for testing purposes
+ * Useful for message testing
+ */
+
+var generateMessage = async function() {
+  let num = Math.floor(Math.random() * (99999 - 10000) + 10000);
+  return testMessage + num;
+}
+
 module.exports = {
   waitFunction: waitFunction,
   scrollToElement: scrollToElement,
   clickByLocation: clickByLocation,
-  navigatePage: navigatePage
+  navigatePage: navigatePage,
+  generateMessage: generateMessage,
 }
