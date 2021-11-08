@@ -46,9 +46,9 @@ var navigatePage = async function(driver, url) {
  * Useful for message testing
  */
 
-var generateMessage = async function() {
+var generateMessage = function() {
   let num = Math.floor(Math.random() * (99999 - 10000) + 10000);
-  return testMessage + num;
+  return 'Test Message ' + num;
 }
 
 module.exports = {

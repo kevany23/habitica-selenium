@@ -17,6 +17,23 @@ var runMessageTests = async function(driver) {
         "//div[contains(text(), 'seleniumTester')]/ancestor::div[@class='conversation']"
       ));
       await conversation.click();
+      let searchbar = await driver.findElement(
+        By.xpath(
+          "//textarea[@placeholder='Type your message here.']"
+        )
+      );
+      let message = generateMessage();
+      searchbar.sendKeys(message);
+      let sendButton = await driver.findElement(
+        By.xpath("//button[contains(text(), 'Send')]")
+      );
+      await sendButton.click();
+      let messageCard = driver.findElement(
+        By.xpath(
+          `//p[contains(text(), '${message}')]`
+        ));
+      let sentMsg = await messageCard.getText();
+      assert.equal(sentMsg, message);
     });
   })
 };

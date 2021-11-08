@@ -7,6 +7,7 @@ const { runRewardTests } = require('./tests/rewardTest.js');
 const { runTavernTests } = require('./tests/tavernTest.js');
 const { runGuildTests } = require('./tests/guildTest.js');
 const { runMessageTests } = require('./tests/messageTest.js');
+const { runProfileTests } = require('./tests/profileTest.js');
 
 
 describe("Running Selenium Testing", async function () {
@@ -37,6 +38,7 @@ describe("Running Selenium Testing", async function () {
         runGuildTests(driver);
         runTavernTests(driver);
         runMessageTests(driver);
+        runProfileTests(driver);
       }
       catch (err) {
         console.log("ERROR IN TESTING");
