@@ -1,6 +1,6 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { waitFunction, navigatePage } = require('../util/util');
+const { waitFunction, navigatePage, getUrl } = require('../util/util');
 const assert = require('assert');
 
 var driver;
@@ -14,7 +14,7 @@ var runTaskTests = function (driver) {
   setDriver(driver);
   describe('Task tests in taskTest.js', function () {
     beforeEach(function () {
-      navigatePage(driver, 'http://localhost:8080/');
+      navigatePage(driver, getUrl());
     });
     it('Health Test', async function () {
       let debugButton = await driver.findElement(By.xpath(

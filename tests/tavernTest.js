@@ -1,12 +1,12 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { waitFunction } = require('../util/util');
+const { waitFunction, getUrl } = require('../util/util');
 const assert = require('assert');
 
 var runTavernTests = async function(driver) {
   describe('Running tests on tavern chat', function() {
     it('Navigating to Tavern Page', async function() {
-      await driver.get('http://localhost:8080/groups/tavern')
+      await driver.get(getUrl('groups/tavern'))
     });
     it('Testing messaging', async function() {
       let chatText = await driver.findElement(

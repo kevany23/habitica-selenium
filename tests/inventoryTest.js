@@ -1,20 +1,20 @@
 const { Builder, By, Key, until, WebDriver, Origin } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { waitFunction, scrollToElement, clickByLocation, navigatePage } = require('../util/util');
+const { waitFunction, scrollToElement, clickByLocation, navigatePage, getUrl } = require('../util/util');
 const assert = require('assert');
 
 var runInventoryTests = async function(driver) {
   describe('Inventory page tests in inventoryTest.js', function() {
     this.timeout(10000);
     beforeEach(function () {
-      navigatePage(driver, 'http://localhost:8080/inventory/equipment');
+      navigatePage(driver, getUrl('inventory/equipment'));
     });
     it('Testing inventory/equipment functionality with Sword', async function() {
       // let page finish loading to avoid flakiness
-      await waitFunction(200);
+      await waitFunction(1000);
       // Profile Div
       let profile = await driver.findElement(
-        By.className('avatar background_blue')
+        By.className('avatar background_violet')
       );
       await profile.click();
       let statsTab = await driver.findElement(
@@ -86,7 +86,7 @@ var runInventoryTests = async function(driver) {
       // Check stats first
       
       let profile = await driver.findElement(
-        By.className('avatar background_blue')
+        By.className('avatar background_violet')
       );
       await profile.click();
       let statsTab = await driver.findElement(
@@ -123,7 +123,7 @@ var runInventoryTests = async function(driver) {
       await driver.actions().sendKeys(Key.ESCAPE).perform();
       
       profile = await driver.findElement(
-        By.className('avatar background_blue')
+        By.className('avatar background_violet')
       );
       await profile.click();
       statsTab = await driver.findElement(

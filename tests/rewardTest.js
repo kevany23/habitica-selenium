@@ -1,16 +1,16 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { navigatePage } = require('../util/util');
+const { navigatePage, getUrl } = require('../util/util');
 const assert = require('assert');
 
 var runRewardTests = async function(driver) {
   describe('Now Running tests on rewardTest.js', function() {
     this.timeout(10000);
     beforeEach(function () {
-      navigatePage(driver, 'http://localhost:8080/');
+      navigatePage(driver, getUrl());
     });
     it('Navigating back to Task Page', async function(){
-      await driver.get('http://localhost:8080/');
+      await driver.get(getUrl());
     });
     it('Reward tests', async function() {
       // Get amount of gold

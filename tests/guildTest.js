@@ -1,13 +1,13 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { navigatePage, waitFunction, clickByLocation } = require('../util/util');
+const { navigatePage, waitFunction, clickByLocation, getUrl } = require('../util/util');
 const assert = require('assert');
 
 var runGuildTests = async function(driver) {
   describe('Guild page tests in guildTest.js', function() {
     this.timeout(10000);
     beforeEach(async function () {
-      navigatePage(driver, 'http://localhost:8080/groups/myGuilds');
+      navigatePage(driver, getUrl('groups/myGuilds'));
       await waitFunction(1000);
     });
     it('Testing my guilds page - filters', async function() {

@@ -1,3 +1,5 @@
+const { URL } = require('../config/config.js');
+
 /**
  * Basic function to wait for a certain period of time
  */
@@ -51,10 +53,21 @@ var generateMessage = function() {
   return 'Test Message ' + num;
 }
 
+/**
+ * Generate URL
+ */
+var getUrl = function(route) {
+  if (!route) {
+    return URL
+  }
+  return URL + route;
+}
+
 module.exports = {
   waitFunction: waitFunction,
   scrollToElement: scrollToElement,
   clickByLocation: clickByLocation,
   navigatePage: navigatePage,
   generateMessage: generateMessage,
+  getUrl: getUrl,
 }
