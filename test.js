@@ -2,6 +2,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const { Options } = require('selenium-webdriver/chrome');
 const assert = require('assert');
+const { LOGIN } = require('./config/config.js');
 const { getUrl, waitFunction } = require('./util/util.js');
 const { runTaskTests } = require('./tests/taskTest.js');
 const { runInventoryTests } = require('./tests/inventoryTest.js');
@@ -10,7 +11,7 @@ const { runTavernTests } = require('./tests/tavernTest.js');
 const { runGuildTests } = require('./tests/guildTest.js');
 const { runMessageTests } = require('./tests/messageTest.js');
 const { runProfileTests } = require('./tests/profileTest.js');
-const { URL, LOGIN } = require('./config/config.js');
+const { runPartyTests } = require('./tests/partyTest.js');
 
 
 describe("Running Selenium Testing", async function () {
@@ -38,13 +39,14 @@ describe("Running Selenium Testing", async function () {
         assert.equal(currUrl, getUrl(), "Login did not work");
 
         // Run all the tests here
-        //runTaskTests(driver);
+        runTaskTests(driver);
         runInventoryTests(driver);
         runRewardTests(driver);
         runGuildTests(driver);
         runTavernTests(driver);
         runMessageTests(driver);
         runProfileTests(driver);
+        runPartyTests(driver);
       }
       catch (err) {
         console.log("ERROR IN TESTING");

@@ -11,7 +11,7 @@ var runInventoryTests = async function(driver) {
     });
     it('Testing inventory/equipment functionality with Sword', async function() {
       // let page finish loading to avoid flakiness
-      await waitFunction(1000);
+      await waitFunction(1600);
       // Profile Div
       let profile = await driver.findElement(
         By.className('avatar background_violet')
