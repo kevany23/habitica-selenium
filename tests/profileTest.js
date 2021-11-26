@@ -1,13 +1,13 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { navigatePage, waitFunction, generateMessage } = require('../util/util');
+const { navigatePage, waitFunction, generateMessage, getUrl } = require('../util/util');
 const assert = require('assert');
 
 var runProfileTests = async function(driver) {
   describe('Profile tests in profileTest.js', function() {
     this.timeout(10000);
     beforeEach(async function () {
-      navigatePage(driver, 'http://localhost:8080/user/profile');
+      navigatePage(driver, getUrl('user/profile'));
       await waitFunction(1500);
     });
     it('Updating profile test', async function() {
@@ -25,7 +25,7 @@ var runProfileTests = async function(driver) {
         By.xpath("//div[@id='userProfile']/descendant::button[contains(text(), 'Save')]")
       );
       saveButton.click();
-      await waitFunction(100);
+      await waitFunction(500);
       aboutSection = await driver.findElement(
         By.xpath("//div[@class='about profile-section']" +
         `/descendant::p[contains(text(), '${message}')]`

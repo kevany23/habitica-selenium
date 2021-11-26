@@ -16,6 +16,10 @@ var scrollToElement = function (driver, element) {
   driver.executeScript("arguments[0].scrollIntoView()", element);
 }
 
+var deleteElement = function(driver, className) {
+  driver.executeScript(`return document.getElementsByClassName('${className}')[0].remove();`);
+}
+
 /**
  * A more robust approach to clicking an element, as opposed to
  * element.click().
@@ -66,6 +70,7 @@ var getUrl = function(route) {
 module.exports = {
   waitFunction: waitFunction,
   scrollToElement: scrollToElement,
+  deleteElement: deleteElement,
   clickByLocation: clickByLocation,
   navigatePage: navigatePage,
   generateMessage: generateMessage,

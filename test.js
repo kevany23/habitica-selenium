@@ -4,6 +4,7 @@ const { Options } = require('selenium-webdriver/chrome');
 const assert = require('assert');
 const { LOGIN } = require('./config/config.js');
 const { getUrl, waitFunction } = require('./util/util.js');
+const { runDebugSetupTests } = require('./tests/debugSetupTest.js');
 const { runTaskTests } = require('./tests/taskTest.js');
 const { runInventoryTests } = require('./tests/inventoryTest.js');
 const { runRewardTests } = require('./tests/rewardTest.js');
@@ -12,7 +13,7 @@ const { runGuildTests } = require('./tests/guildTest.js');
 const { runMessageTests } = require('./tests/messageTest.js');
 const { runProfileTests } = require('./tests/profileTest.js');
 const { runPartyTests } = require('./tests/partyTest.js');
-
+const { runShopTests } = require('./tests/shopTest.js');
 
 describe("Running Selenium Testing", async function () {
   it('Loading Selenium Webdriver and logging in', async function () {
@@ -39,8 +40,10 @@ describe("Running Selenium Testing", async function () {
         assert.equal(currUrl, getUrl(), "Login did not work");
 
         // Run all the tests here
+        runDebugSetupTests(driver);
         runTaskTests(driver);
         runInventoryTests(driver);
+        runShopTests(driver);
         runRewardTests(driver);
         runGuildTests(driver);
         runTavernTests(driver);

@@ -16,33 +16,6 @@ var runTaskTests = function (driver) {
     beforeEach(function () {
       navigatePage(driver, getUrl());
     });
-    it('Health Test', async function () {
-      let debugButton = await driver.findElement(By.xpath(
-        "//button[contains(text(), 'Toggle Debug Menu')]"
-      ));
-      await debugButton.click();
-      let debugGroup = await driver.findElement(
-        By.className('debug-group')
-      );
-      let health1Button = await driver.findElement(By.xpath(
-        "//a[contains(text(), 'Health = 1')]"
-      ));
-      await health1Button.click();
-      let healButton = await driver.findElement(By.xpath(
-        "//a[contains(text(), '+ 10HP')]"
-      ));
-      for (let i = 0; i < 5; i++) {
-        await healButton.click();
-      }
-      // Should find health display div first
-      // Check health here
-      let healthDisplay = await driver.findElement(By.xpath(
-        "//span[contains(text(), '/ 50')]"
-      ));
-      let healthText = await healthDisplay.getText();
-      let currHealth = parseInt(healthText.split('/')[0]);
-      assert.equal(currHealth, 51, 'Should be 51 HP');
-    });
     it('Daily Task test', async function () {
       // First get current EXP Level
       // Define function to get the element and value
