@@ -1,6 +1,7 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const { waitFunction, navigatePage, getUrl, deleteElement } = require('../util/util');
+const { getHealth } = require('../util/common.js');
 const assert = require('assert');
 
 /**
@@ -32,11 +33,7 @@ var runDebugSetupTests = function(driver) {
       }
       // Should find health display div first
       // Check health here
-      let healthDisplay = await driver.findElement(By.xpath(
-        "//span[contains(text(), '/ 50')]"
-      ));
-      let healthText = await healthDisplay.getText();
-      let currHealth = parseInt(healthText.split('/')[0]);
+      let currHealth = await getHealth(driver);
       assert.equal(currHealth, 51, 'Should be 51 HP');
     })
     it('Testing add GP', async function() {

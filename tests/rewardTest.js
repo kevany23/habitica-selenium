@@ -1,6 +1,8 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { navigatePage, getUrl, waitFunction } = require('../util/util');
+const { navigatePage, getUrl, waitFunction,
+  checkIfElementExistsXpath, checkIfElementExistsCss, clickByLocation } = require('../util/util.js');
+const { getGold, getHealth } = require('../util/common.js');
 const assert = require('assert');
 
 var runRewardTests = async function(driver) {
@@ -34,6 +36,32 @@ var runRewardTests = async function(driver) {
       let currGold = Number(await goldElem.getText());
       assert.equal(currGold, initialGold - 12);
     });
+    it('Testing reward potion', async function() {
+      // Turn health back to 1 to test potion
+      if (! (await checkIfElementExistsXpath(
+        driver,
+        "//a[contains(text(), 'Health = 1')]"
+        ))) {
+        let debugButton = await driver.findElement(By.xpath(
+          "//button[contains(text(), 'Toggle Debug Menu')]"
+        ));
+        await debugButton.click();
+      }
+      let health1Button = await driver.findElement(By.xpath(
+        "//a[contains(text(), 'Health = 1')]"
+      ));
+      await health1Button.click();
+
+      // Now test the potion
+      let goldBefore = await getGold(driver);
+      let healthBefore = await getHealth(driver);
+      let potionDiv = await driver.findElement(By.className('shop_potion'));
+      await clickByLocation(driver, potionDiv);
+      let goldAfter = await getGold(driver);
+      let healthAfter = await getHealth(driver);
+      assert.equal(goldAfter, goldBefore - 25);
+      assert.equal(healthAfter, healthBefore + 15);
+    })
   });
 };
 

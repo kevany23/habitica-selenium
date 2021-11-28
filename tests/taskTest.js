@@ -1,6 +1,7 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { waitFunction, navigatePage, getUrl } = require('../util/util');
+const { waitFunction, navigatePage, getUrl, generateMessage } = require('../util/util');
+const { getHealth } = require('../util/common.js');
 const assert = require('assert');
 
 var driver;
@@ -55,36 +56,34 @@ var runTaskTests = function (driver) {
     });
 
     it('Testing Habits', async function () {
-      let startHealth = await getHealth();
+      let startHealth = await getHealth(driver);
       let habitBar = await driver.findElement(
         By.className('task-control habit-control habit-control-negative-enabled')
       );
       habitBar.click();
-      let currHealth = await getHealth();
+      let currHealth = await getHealth(driver);
       // This is actually harder to test than expected
       // For now just check if it decreases health
       assert.equal(currHealth < startHealth, true);
     });
+
+    it('Testing add todo', async function() {
+      let addTodoBar = await driver.findElement(
+        By.xpath("//textarea[@placeholder='Add a To Do']")
+      );
+      let taskTitle = generateMessage();
+      await addTodoBar.sendKeys(taskTitle);
+      await addTodoBar.sendKeys(Key.ENTER);
+
+      let newTodo = await driver.findElement(
+        By.xpath(
+          "//h3[@class='task-title markdown']/" +
+          `p[contains(text(), '${taskTitle}')]`
+        )
+      );
+      assert.equal(await newTodo.getText(), taskTitle);
+    })
   });
-}
-
-/**
- * Common helpers here
- * 
- * This includes taking commonly used elements and their values
- */
-
-async function getHealth() {
-  let healthDisplay = await driver.findElement(By.xpath(
-    "//span[contains(text(), '/ 50')]"
-  ));
-  let healthText = await healthDisplay.getText();
-  let currHealth = parseInt(healthText.split('/')[0]);
-  return currHealth;
-}
-
-function getExp() {
-
 }
 
 module.exports = {

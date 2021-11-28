@@ -1,3 +1,4 @@
+const { Builder, By, Key, until } = require('selenium-webdriver');
 const { URL } = require('../config/config.js');
 
 /**
@@ -67,6 +68,22 @@ var getUrl = function(route) {
   return URL + route;
 }
 
+/**
+ * Check if element exists, using xpath
+ */
+var checkIfElementExistsXpath = async function(driver, xpath) {
+  let elements = await driver.findElements(By.xpath(xpath));
+  return elements.length > 0;
+}
+
+/**
+ * Check if element exists, using css
+ */
+var checkIfElementExistsCss = async function(driver, css) {
+  let elements = await driver.findElement(By.css(css));
+  return elements.length > 0;
+}
+
 module.exports = {
   waitFunction: waitFunction,
   scrollToElement: scrollToElement,
@@ -75,4 +92,6 @@ module.exports = {
   navigatePage: navigatePage,
   generateMessage: generateMessage,
   getUrl: getUrl,
+  checkIfElementExistsXpath: checkIfElementExistsXpath,
+  checkIfElementExistsCss: checkIfElementExistsCss
 }

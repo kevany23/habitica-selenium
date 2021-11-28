@@ -1,6 +1,7 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const { navigatePage, waitFunction, generateMessage, getUrl } = require('../util/util');
+const { getGems } = require('../util/common.js');
 const assert = require('assert');
 
 var numChocolate;
@@ -24,11 +25,7 @@ var runShopTests = async function(driver) {
     it('Testing shop functionality', async function() {
       navigatePage(driver, getUrl('shops/market'));
       await waitFunction(2000);
-      let gemsElement = await driver.findElement(
-        By.xpath("//a[@class='top-menu-icon svg-icon gem']" +
-          "/following-sibling::span")
-      );
-      numGems = parseInt(await gemsElement.getText());
+      numGems = await getGems(driver);
       // Buy chocolate
       let chocolate = await driver.findElement(
         By.className('Pet_Food_Chocolate')
@@ -56,11 +53,7 @@ var runShopTests = async function(driver) {
       let currChocolate = parseInt(await invChocElmt.getText());
       assert.equal(currChocolate, numChocolate + 1);
       
-      let gemsElement = await driver.findElement(
-        By.xpath("//a[@class='top-menu-icon svg-icon gem']" +
-          "/following-sibling::span")
-      );
-      let currGems = parseInt(await gemsElement.getText());
+      let currGems = await getGems(driver);
       assert.equal(currGems, numGems - 1);
     })
   })
