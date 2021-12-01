@@ -80,7 +80,15 @@ var checkIfElementExistsXpath = async function(driver, xpath) {
  * Check if element exists, using css
  */
 var checkIfElementExistsCss = async function(driver, css) {
-  let elements = await driver.findElement(By.css(css));
+  let elements = await driver.findElements(By.css(css));
+  return elements.length > 0;
+}
+
+/**
+ * Check if element exists, using classname
+ */
+var checkIfElementExistsClassName = async function(driver, className) {
+  let elements = await driver.findElements(By.className(className));
   return elements.length > 0;
 }
 
@@ -93,5 +101,6 @@ module.exports = {
   generateMessage: generateMessage,
   getUrl: getUrl,
   checkIfElementExistsXpath: checkIfElementExistsXpath,
-  checkIfElementExistsCss: checkIfElementExistsCss
+  checkIfElementExistsCss: checkIfElementExistsCss,
+  checkIfElementExistsClassName: checkIfElementExistsClassName,
 }

@@ -61,6 +61,23 @@ var runRewardTests = async function(driver) {
       let healthAfter = await getHealth(driver);
       assert.equal(goldAfter, goldBefore - 25);
       assert.equal(healthAfter, healthBefore + 15);
+
+      // Revert back to full health
+      if (! (await checkIfElementExistsXpath(
+        driver,
+        "//a[contains(text(), '+ 10HP')]"
+        ))) {
+        let debugButton = await driver.findElement(By.xpath(
+          "//button[contains(text(), 'Toggle Debug Menu')]"
+        ));
+        await debugButton.click();
+      }
+      let addHPButton = await driver.findElement(By.xpath(
+        "//a[contains(text(), '+ 10HP')]"
+      ));
+      for (let i = 0; i < 4; i++) {
+        await addHPButton.click();
+      }
     })
   });
 };
