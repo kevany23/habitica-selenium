@@ -8,7 +8,7 @@ var runGuildTests = async function(driver) {
     this.timeout(10000);
     beforeEach(async function () {
       navigatePage(driver, getUrl('groups/myGuilds'));
-      await waitFunction(1000);
+      await waitFunction(1500);
     });
     it('Testing my guilds page - filters', async function() {
       let guildItems = await driver.findElements(

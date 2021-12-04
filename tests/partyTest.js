@@ -8,7 +8,7 @@ var runPartyTests = async function(driver) {
     this.timeout(10000);
     beforeEach(async function () {
       navigatePage(driver, getUrl('party'));
-      await waitFunction(1000);
+      await waitFunction(2000);
     });
     it('Party Message Test', async function() {
       let chatText = await driver.findElement(
@@ -48,7 +48,7 @@ var runPartyTests = async function(driver) {
         By.xpath("//button[contains(text(), 'Update Party')]")
       );
       await updatePartyBtn.click();
-      await waitFunction(500);
+      await waitFunction(800);
       let partyDescription = await driver.findElement(
         By.xpath(`//p[contains(text(), '${message}')]`)
       );

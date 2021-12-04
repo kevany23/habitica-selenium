@@ -7,3 +7,6 @@ Loading messages page - even with no messages slower than other loading
 
 ## Flakiness in performance
 Clicking on rewards
+
+## Shortcomings in test server
+Lack of sample test challenges and guilds
