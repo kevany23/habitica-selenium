@@ -15,6 +15,7 @@ const { runProfileTests } = require('./tests/profileTest.js');
 const { runPartyTests } = require('./tests/partyTest.js');
 const { runShopTests } = require('./tests/shopTest.js');
 const { runQuestTests } = require('./tests/questTest.js');
+const { runChallengeTests } = require('./tests/challengeTest.js');
 
 describe("Running Selenium Testing", async function () {
   it('Loading Selenium Webdriver and logging in', async function () {
@@ -52,6 +53,7 @@ describe("Running Selenium Testing", async function () {
         runProfileTests(driver);
         runPartyTests(driver);
         runQuestTests(driver);
+        runChallengeTests(driver);
       }
       catch (err) {
         console.log("ERROR IN TESTING");

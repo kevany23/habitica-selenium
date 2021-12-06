@@ -10,3 +10,6 @@ Clicking on rewards
 
 ## Shortcomings in test server
 Lack of sample test challenges and guilds
+
+## Issues
+It seems like when you join a challenge the tasks don't appear in the task page immediately
