@@ -57,7 +57,7 @@ var navigatePage = async function(driver, url) {
  */
 
 var generateMessage = function() {
-  let num = Math.floor(Math.random() * (99999 - 10000) + 10000);
+  let num = Math.floor(Math.random() * (999999 - 100000) + 100000);
   return 'Test Message ' + num;
 }
 

@@ -31,7 +31,7 @@ var runQuestTests = async function (driver) {
       }
       // Use quest scroll on party
       await driver.get(getUrl('party'));
-      await waitFunction(1000);
+      await waitFunction(2000);
       let selectQuest = driver.findElement(
         By.xpath("//button[contains(text(), 'Select Quest')]")
       );

@@ -5,7 +5,7 @@ const assert = require('assert');
 
 var runPartyTests = async function(driver) {
   describe('Party tests in partyTest.js', function() {
-    this.timeout(10000);
+    this.timeout(12000);
     beforeEach(async function () {
       navigatePage(driver, getUrl('party'));
       await waitFunction(2000);
@@ -21,7 +21,7 @@ var runPartyTests = async function(driver) {
         By.xpath("//button[contains(text(), 'Send')]")
       );
       await sendButton.click();
-      await waitFunction(400);
+      await waitFunction(1000);
       let messageCard = driver.findElement(
         By.xpath(
           `//p[contains(text(), '${message}')]`

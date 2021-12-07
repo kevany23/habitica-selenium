@@ -23,10 +23,15 @@ To properly run the Selenium tests, some configurations must be made manually on
 
 - Use the violet background for the account profile.
 
-- Create your own party for the test account.
+- Create your own party for the test account. Do not have give the party a quest.
 
 - Have at least one habit with the negative enabled
 
 - Send at least one message to your own test account. This allows the messaging tests to be run.
 
 - Guilds: Create 2 bronze tier guilds but no gold tier. Create a guild with 'local' in its name.
+
+### Common Issues and Solutions
+- Flakiness: increase the wait between loads and selenium events
+- Make sure account and local server set up properly
+- Delete newly created messages and items to reduce loading times

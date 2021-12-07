@@ -18,7 +18,8 @@ var runProfileTests = async function(driver) {
       let aboutSection = await driver.findElement(
         By.xpath("//textarea[@placeholder='Please introduce yourself']")
       );
-      aboutSection.clear();
+      await aboutSection.clear();
+      await waitFunction(500);
       let message = generateMessage();
       aboutSection.sendKeys(message);
       let saveButton = await driver.findElement(
