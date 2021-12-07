@@ -1,4 +1,5 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
+const { deleteElement, scrollToElement } = require('./util.js');
 /**
  * File for getting common elements and items
  */
@@ -39,8 +40,35 @@ var getGems = async function(driver) {
   return numGems;
 }
 
+var hideSkillPanel = async function(driver) {
+  // check if skillPanel exists
+  let panel = await driver.findElement(
+    By.xpath(
+      "//div[contains(text(), 'Skills')]"
+    )
+  );
+  await panel.click();
+}
+
+var deletePanel = async function(driver) {
+  deleteElement(driver, 'drawer-container');
+}
+
+var expandInventory = async function(driver) {
+  let buttons = await driver.findElements(
+    By.xpath("//span[contains(text(), 'Show More')]")
+  );
+  for (let button of buttons) {
+    scrollToElement(driver, button);
+    await button.click();
+  }
+}
+
 module.exports = {
   getHealth: getHealth,
   getGold: getGold,
-  getGems: getGems
+  getGems: getGems,
+  hideSkillPanel: hideSkillPanel,
+  expandInventory: expandInventory,
+  deletePanel: deletePanel
 }

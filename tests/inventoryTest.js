@@ -1,17 +1,31 @@
 const { Builder, By, Key, until, WebDriver, Origin } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
-const { waitFunction, scrollToElement, clickByLocation, navigatePage, getUrl } = require('../util/util');
+const { waitFunction, scrollToElement, clickByLocation, navigatePage, getUrl } = require('../util/util.js');
+const { expandInventory, hideSkillPanel, deletePanel } = require('../util/common.js')
 const assert = require('assert');
+
+/**
+ * Tests some inventory page functionality
+ * 
+ * Setup Required:
+ * Must have leather armor and sword
+ * Must be warrior class
+ */
 
 var runInventoryTests = async function(driver) {
   describe('Inventory page tests in inventoryTest.js', function() {
-    this.timeout(10000);
-    beforeEach(function () {
+    this.timeout(15000);
+    beforeEach(async function () {
       navigatePage(driver, getUrl('inventory/equipment'));
+      await waitFunction(2000)
+      // expand all items lists
+      //await expandInventory(driver);
     });
     it('Testing inventory/equipment functionality with Sword', async function() {
       // let page finish loading to avoid flakiness
       await waitFunction(1600);
+      deletePanel(driver);
+      await expandInventory(driver);
       // Profile Div
       let profile = await driver.findElement(
         By.className('avatar background_violet')
@@ -62,6 +76,7 @@ var runInventoryTests = async function(driver) {
       let currStrength = await strengthElement.getText();
       currStrength = parseInt(currStrength);
       // Finally, we make the strength test assertion here
+      // Make sure character is warrior class
       assert.equal(currStrength, equipStrength - 4);
       await driver.actions().sendKeys(Key.ESCAPE).perform();
 
@@ -88,7 +103,8 @@ var runInventoryTests = async function(driver) {
       let profile = await driver.findElement(
         By.className('avatar background_violet')
       );
-      await profile.click();
+      await clickByLocation(driver, profile);
+      await waitFunction(500);
       let statsTab = await driver.findElement(
         By.xpath("//div[contains(text(), 'Stats')]")
       );

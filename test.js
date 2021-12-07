@@ -19,7 +19,7 @@ const { runChallengeTests } = require('./tests/challengeTest.js');
 
 describe("Running Selenium Testing", async function () {
   it('Loading Selenium Webdriver and logging in', async function () {
-    this.timeout(100000);
+    this.timeout(200000);
     let options = new Options();
     options.addArguments('log-level=3');
     let driver = await new Builder().forBrowser('chrome').withCapabilities(options).build();
@@ -42,6 +42,7 @@ describe("Running Selenium Testing", async function () {
         assert.equal(currUrl, getUrl(), "Login did not work");
 
         // Run all the tests here
+        // When testing/debugging you can comment out some tests
         runDebugSetupTests(driver);
         runTaskTests(driver);
         runInventoryTests(driver);

@@ -2,7 +2,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const { SeleniumServer } = require('selenium-webdriver/remote');
 const { waitFunction, navigatePage, getUrl, generateMessage,
   checkIfElementExistsXpath } = require('../util/util');
-const { getHealth } = require('../util/common.js');
+const { getHealth, hideSkillPanel, deletePanel } = require('../util/common.js');
 const assert = require('assert');
 
 var driver;
@@ -16,10 +16,12 @@ var runTaskTests = function (driver) {
   setDriver(driver);
   describe('Task tests in taskTest.js', function () {
     this.timeout(20000);
-    beforeEach(function () {
+    beforeEach(async function () {
       navigatePage(driver, getUrl());
+      await waitFunction(1000);
     });
     it('Daily Task test', async function () {
+      await deletePanel(driver);
       // First get current EXP Level
       // Define function to get the element and value
       let progressBars = await driver.findElements(
@@ -53,6 +55,7 @@ var runTaskTests = function (driver) {
       await waitFunction(100);
       // Revert the task completion
       await dailyCheckbox.click();
+      await waitFunction(800);
       currExp = await getExp();
       assert.equal(currExp, initialExp, 'Testing daily task uncheck');
     });
@@ -69,7 +72,7 @@ var runTaskTests = function (driver) {
       assert.equal(currHealth < startHealth, true);
     });
 
-    it('Testing add and delete todo', async function() {
+    it.only('Testing add and delete todo', async function() {
       let addTodoBar = await driver.findElement(
         By.xpath("//textarea[@placeholder='Add a To Do']")
       );
@@ -103,7 +106,7 @@ var runTaskTests = function (driver) {
         )
       );
       deleteButton.click();
-      await waitFunction(500);
+      await waitFunction(700);
       let alert = await driver.switchTo().alert();
       await alert.accept();
       await waitFunction(500);
@@ -148,7 +151,7 @@ var runTaskTests = function (driver) {
         )
       );
       deleteButton.click();
-      await waitFunction(500);
+      await waitFunction(700);
       let alert = await driver.switchTo().alert();
       await alert.accept();
       await waitFunction(500);
@@ -193,7 +196,7 @@ var runTaskTests = function (driver) {
         )
       );
       deleteButton.click();
-      await waitFunction(500);
+      await waitFunction(700);
       let alert = await driver.switchTo().alert();
       await alert.accept();
       await waitFunction(500);

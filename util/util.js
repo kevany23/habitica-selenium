@@ -17,6 +17,9 @@ var scrollToElement = function(driver, element) {
   driver.executeScript("arguments[0].scrollIntoView()", element);
 }
 
+/**
+ * Function to delete element from DOM
+ */
 var deleteElement = function(driver, className) {
   driver.executeScript(`return document.getElementsByClassName('${className}')[0].remove();`);
 }
@@ -32,8 +35,8 @@ var clickByLocation = async function(driver, element) {
   let rect = await element.getRect();
   await driver.actions().move({
     origin: element,
-    x: rect.width / 2,
-    y: rect.height / 2,
+    x: ~~(rect.width / 2),
+    y: ~~(rect.height / 2),
   }).click().perform();
 }
 

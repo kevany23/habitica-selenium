@@ -1,9 +1,12 @@
 # Testing Habitica with Selenium
+This folder adds selenium testing to Habitica.
 
 ## Setup
 To set up the project, you will need to install Selenium Webdriver, specifically Chromedriver. Place `chromedriver.exe` in the project folder.<br>
 
-In the project folder, run the command `npm install` to install all the dependencies.
+In the project folder, run the command `npm install` to install all the dependencies.<br>
+
+For most consistent results, minimize inventory and other things added to the game/account.
 
 ## To run the tests
 Haibitca must be running locally first (See Habitica repo)\

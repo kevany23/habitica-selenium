@@ -7,7 +7,7 @@ const challenge = require('../util/challenge.js');
 
 var runChallengeTests = function(driver) {
   describe('Challenge tests in challengeTest.js', async function() {
-    this.timeout(24000);
+    this.timeout(30000);
     beforeEach(async function () {
       navigatePage(driver, getUrl('party'));
       // This page seems to take longer to load
