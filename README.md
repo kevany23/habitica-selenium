@@ -19,7 +19,7 @@ To properly run the Selenium tests, some configurations must be made manually on
 
 - Make sure the popup for the welcome back dailies has been closed.
 
-- The account must be (opted in as) a Warrior and at least level 10. The account should have mana as a result of opting in.
+- The account must be (opted in as) a Warrior and at least level 10. The account should have mana as a result of opting in. You can use the settings page to change the account's level and class.
 
 - Purchase a sword and leather armor. Equip the sword but not the leather armor. (Needed for inventory test)
 
