@@ -37,7 +37,7 @@ var runTaskTests = function (driver) {
       await waitFunction(200);
       // Revert the task completion
       await dailyCheckbox.click();
-      await waitFunction(1200);
+      await waitFunction(1500);
       currExp = await getExp(driver);
       assert.equal(currExp, initialExp, 'Testing daily task uncheck');
     });

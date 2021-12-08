@@ -15,24 +15,6 @@ var runQuestTests = async function (driver) {
     it('Comprehensive add quest workflow', async function () {
       await driver.get(getUrl('inventory/items'));
       await waitFunction(1000);
-      // Check if slime quest scroll owned
-      if (!checkIfElementExistsClassName('inventory_quest_scroll_slime')) {
-        // Buy Scroll
-        await driver.get(getUrl('shops/quests'));
-        await waitFunction(1000);
-        let questScroll = await driver.findElement(
-          By.className('inventory_quest_scroll_slime')
-        );
-        await questScroll.click();
-        await waitFunction(600);
-        let buyNow = await driver.findElement(
-          By.xpath("//button[contains(text(), 'Buy Now')]")
-        );
-        await buyNow.click();
-        let alert = await driver.switchTo().alert();
-        await alert.accept();
-        await waitFunction(400);
-      }
       // Use quest scroll on party
       await driver.get(getUrl('party'));
       await waitFunction(2000);
