@@ -95,6 +95,14 @@ var checkIfElementExistsClassName = async function(driver, className) {
   return elements.length > 0;
 }
 
+/**
+ * More robust way of clearing inputs, use if clear() doesn't work
+ */
+
+var clearInput = async function(element) {
+  await element.sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+}
+
 module.exports = {
   waitFunction: waitFunction,
   scrollToElement: scrollToElement,
@@ -106,4 +114,5 @@ module.exports = {
   checkIfElementExistsXpath: checkIfElementExistsXpath,
   checkIfElementExistsCss: checkIfElementExistsCss,
   checkIfElementExistsClassName: checkIfElementExistsClassName,
+  clearInput: clearInput
 }

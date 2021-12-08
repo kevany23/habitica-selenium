@@ -13,7 +13,7 @@ var runChallengeTests = function(driver) {
       // This page seems to take longer to load
       await waitFunction(5000);
     });
-    it('Party challenge', async function() {
+    it('Comprehensive party challenge test', async function() {
 
       let createChallenge = await driver.findElement(
         By.xpath("//button[contains(text(), 'Create Challenge')]")
@@ -90,7 +90,7 @@ var runChallengeTests = function(driver) {
       await createTask.click();
       // Now check the new task
       await driver.get(getUrl(''));
-      await waitFunction(2000)
+      await waitFunction(2500);
       let newTask = await driver.findElement(
         By.xpath(
           `//p[contains(text(), '${newTaskTitle}')]`

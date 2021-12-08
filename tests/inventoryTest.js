@@ -164,7 +164,8 @@ var runInventoryTests = async function(driver) {
           "/parent::button[@class='btn with-icon mt-4 btn-secondary']"
         )
       );
-      unequipBtn.click();
+      await unequipBtn.click();
+      await waitFunction(400);
       
     })
   })

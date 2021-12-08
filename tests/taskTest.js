@@ -24,19 +24,16 @@ var runTaskTests = function (driver) {
       // click here works
       await dailyCheckbox.click();
       await waitFunction(500);
-      //this.timeout(1000);
       // Check the functionality
       let currExp = await getExp(driver);
       // exp diff is inconsistent
       // Now currently checks if exp increased
-      // This test is flakey, it appears by adding code for waiting,
-      // the test is more stable
       assert.equal(currExp > initialExp, true,
         'Checking if exp updates properly');
-      await waitFunction(100);
+      await waitFunction(200);
       // Revert the task completion
       await dailyCheckbox.click();
-      await waitFunction(1000);
+      await waitFunction(1200);
       currExp = await getExp(driver);
       assert.equal(currExp, initialExp, 'Testing daily task uncheck');
     });

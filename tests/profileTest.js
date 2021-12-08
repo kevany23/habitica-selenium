@@ -8,7 +8,7 @@ var runProfileTests = async function(driver) {
     this.timeout(10000);
     beforeEach(async function () {
       navigatePage(driver, getUrl('user/profile'));
-      await waitFunction(1500);
+      await waitFunction(2000);
     });
     it('Updating profile test', async function() {
       let editButton = driver.findElement(
