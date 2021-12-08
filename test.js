@@ -18,6 +18,12 @@ const { runQuestTests } = require('./tests/questTest.js');
 const { runChallengeTests } = require('./tests/challengeTest.js');
 const { runPlayerClassTests } = require('./tests/playerClassTest.js');
 
+/**
+ * This is the main test suite that starts selenium to
+ * run the tests.
+ * 
+ * Website must be running locally/in hosted testing URL
+ */
 describe("Running Selenium Testing", async function () {
   it('Loading Selenium Webdriver and logging in', async function () {
     this.timeout(200000);

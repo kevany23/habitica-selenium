@@ -4,6 +4,12 @@ const { navigatePage, waitFunction, generateMessage, getUrl } = require('../util
 const { getGems } = require('../util/common.js');
 const assert = require('assert');
 
+/**
+ * Test shop functionality. The account should have gems
+ * to make purchases, which shouldn't be a problem with the 
+ * debug tests.
+ */
+
 var numChocolate;
 var numGems;
 

@@ -4,6 +4,9 @@ const { navigatePage, waitFunction, generateMessage, getUrl } = require('../util
 const { LOGIN } = require('../config/config.js');
 const assert = require('assert');
 
+/**
+ * Test messaging by sending a message to the same account.
+ */
 var runMessageTests = async function(driver) {
   describe('Private Message Tests in messageTest.js', function() {
     this.timeout(10000);

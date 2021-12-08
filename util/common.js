@@ -1,15 +1,18 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { checkIfElementExistsClassName, deleteElement, scrollToElement }
   = require('./util.js');
+
 /**
- * File for getting common elements and items
+ * This file consists of helper functions that get common elements
+ * such as health and gold, and find common elements such as
+ * panels.
  */
 
 
 /**
  * Get user's current amount of health
  */
-var getHealth = async function(driver) {
+const getHealth = async function(driver) {
   let healthDisplay = await driver.findElement(By.xpath(
     "//div[@class='progress-bar bg-health']" +
     "/parent::node()/following-sibling::span"
@@ -22,7 +25,7 @@ var getHealth = async function(driver) {
 /**
  * Get user's current amount of exp
  */
-var getExp = async function(driver) {
+const getExp = async function(driver) {
   let expDisplay = await driver.findElement(By.xpath(
     "//div[@class='progress-bar bg-experience']" +
     "/parent::node()/following-sibling::span"
@@ -35,7 +38,7 @@ var getExp = async function(driver) {
 /**
  * Get user's current amount of gold
  */
-var getGold = async function(driver) {
+const getGold = async function(driver) {
   let goldElement = await driver.findElement(
     By.xpath("//div[@class='item-with-icon gold']/descendant::span")
   );
@@ -46,7 +49,7 @@ var getGold = async function(driver) {
 /**
  * Get user's current amount of gems
  */
-var getGems = async function(driver) {
+const getGems = async function(driver) {
   let gemsElement = await driver.findElement(
     By.xpath("//a[@class='top-menu-icon svg-icon gem']" +
       "/following-sibling::span")
@@ -56,9 +59,9 @@ var getGems = async function(driver) {
 }
 
 /**
- * Get user's level
+ * Get user's current level
  */
-var getLevel = async function(driver) {
+const getLevel = async function(driver) {
   let levelSpan = await driver.findElement(
     By.xpath(
       "//div[@class='small-text character-level']" +
@@ -76,7 +79,7 @@ var getLevel = async function(driver) {
  * User doesn't have mana if less than level 10 or hasn't 'selected'
  * a class
  */
-var isManaEnabled = async function(driver) {
+const isManaEnabled = async function(driver) {
   let manaBar = await driver.findElements(By.xpath(
     "//div[@class='progress-bar bg-mana']"
   ));
@@ -84,7 +87,10 @@ var isManaEnabled = async function(driver) {
   return lookup;
 }
 
-var getMana = async function(driver) {
+/**
+ * Get user's current amount of mana.
+ */
+const getMana = async function(driver) {
   let manaDisplay = await driver.findElement(By.xpath(
     "//div[@class='progress-bar bg-mana']" +
     "/parent::node()/following-sibling::span"
@@ -94,7 +100,10 @@ var getMana = async function(driver) {
   return currMana;
 }
 
-var hideSkillPanel = async function(driver) {
+/**
+ * Click on the skill panel to hide it.
+ */
+const hideSkillPanel = async function(driver) {
   // check if skillPanel exists
   let panel = await driver.findElement(
     By.xpath(
@@ -104,11 +113,19 @@ var hideSkillPanel = async function(driver) {
   await panel.click();
 }
 
-var deletePanel = async function(driver) {
+/**
+ * Deletes the bottom panel element from the DOM, useful in
+ * case the panel is blocking elements to interact with.
+ */
+const deletePanel = async function(driver) {
   deleteElement(driver, 'drawer-container');
 }
 
-var expandInventory = async function(driver) {
+/**
+ * Expands the inventory section by clicking all the
+ * show more buttons
+ */
+const expandInventory = async function(driver) {
   let buttons = await driver.findElements(
     By.xpath("//span[contains(text(), 'Show More')]")
   );

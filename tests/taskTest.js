@@ -5,6 +5,10 @@ const { waitFunction, navigatePage, getUrl, generateMessage,
 const { getHealth, getExp, deletePanel } = require('../util/common.js');
 const assert = require('assert');
 
+/**
+ * This file tests the task functionality.
+ * This includes dailies, habits, and todos.
+ */
 var runTaskTests = function (driver) {
   describe('Task tests in taskTest.js', function () {
     this.timeout(20000);

@@ -10,6 +10,9 @@ const assert = require('assert');
  * Setup Required:
  * Must have leather armor and sword
  * Must be warrior class
+ * 
+ * Note: some of the events and interactions here are flakier than
+ * a lot of other tests
  */
 
 var runInventoryTests = async function(driver) {
@@ -18,13 +21,12 @@ var runInventoryTests = async function(driver) {
     beforeEach(async function () {
       navigatePage(driver, getUrl('inventory/equipment'));
       await waitFunction(2000)
-      // expand all items lists
-      //await expandInventory(driver);
     });
     it('Testing inventory/equipment functionality with Sword', async function() {
       // let page finish loading to avoid flakiness
       await waitFunction(1600);
       deletePanel(driver);
+      // expand all item lists
       await expandInventory(driver);
       // Profile Div
       let profile = await driver.findElement(
@@ -153,8 +155,9 @@ var runInventoryTests = async function(driver) {
       );
       let currCons = await consElement.getText();
       await driver.actions().sendKeys(Key.ESCAPE).perform();
-      // assertion here
       assert.equal(currCons, initialCons + 4);
+
+      // We finish by unequiping the leather armor
       scrollToElement(driver, armorElement);
       clickByLocation(driver, armorElement);
       await waitFunction(400);

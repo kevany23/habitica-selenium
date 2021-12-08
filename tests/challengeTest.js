@@ -5,6 +5,9 @@ const { challengeMessage, taskMessage } = require('../util/challenge.js')
 const assert = require('assert');
 const challenge = require('../util/challenge.js');
 
+/**
+ * Tests workflow for adding challenge to party.
+ */
 var runChallengeTests = function(driver) {
   describe('Challenge tests in challengeTest.js', async function() {
     this.timeout(30000);

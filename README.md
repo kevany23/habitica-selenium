@@ -10,7 +10,7 @@ For most consistent results, minimize inventory and other things added to the ga
 
 ## To run the tests
 Haibitca must be running locally first (See Habitica repo)\
-`npm test`
+Run the command `npm test`
 
 ## Manual setups
 To properly run the Selenium tests, some configurations must be made manually on the app:
@@ -29,9 +29,11 @@ To properly run the Selenium tests, some configurations must be made manually on
 
 - Send at least one message to your own test account. This allows the messaging tests to be run.
 
-- Guilds: Create 2 bronze tier guilds but no gold tier. Create a guild with 'local' in its name.
+- Guilds: Create 1 private guild for the test account. Give it the creativity category. There should be only one guild to be listed under "My guilds".
 
 ### Common Issues and Solutions
 - Flakiness: increase the wait between loads and selenium events
+- Sometimes, you just need to run the tests again.
 - Make sure account and local server set up properly
 - Delete newly created messages and items to reduce loading times
+- There is currently an issue with guild categories, which is why the test is disabled on the repo

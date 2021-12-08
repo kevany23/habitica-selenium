@@ -3,6 +3,9 @@ const { SeleniumServer } = require('selenium-webdriver/remote');
 const { navigatePage, waitFunction, generateMessage, getUrl } = require('../util/util');
 const assert = require('assert');
 
+/**
+ * Test profile editing.
+ */
 var runProfileTests = async function(driver) {
   describe('Profile tests in profileTest.js', function() {
     this.timeout(10000);

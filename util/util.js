@@ -2,9 +2,14 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const { URL } = require('../config/config.js');
 
 /**
+ * This file consists of several utility helper functions, such
+ * as some simple DOM helpers
+ */
+
+/**
  * Basic function to wait for a certain period of time
  */
-var waitFunction= function(time) {
+const waitFunction= function(time) {
   return new Promise((res) => {
     setTimeout(res, time);
   });
@@ -13,14 +18,14 @@ var waitFunction= function(time) {
 /**
  * Basic function to scroll to an element
  */
-var scrollToElement = function(driver, element) {
+const scrollToElement = function(driver, element) {
   driver.executeScript("arguments[0].scrollIntoView()", element);
 }
 
 /**
  * Function to delete element from DOM
  */
-var deleteElement = function(driver, className) {
+const deleteElement = function(driver, className) {
   driver.executeScript(`return document.getElementsByClassName('${className}')[0].remove();`);
 }
 
@@ -31,7 +36,7 @@ var deleteElement = function(driver, className) {
  * and clicks accordingly insetad of clicking directly, thus
  * avoiding issues with unseletable elements.
  */
-var clickByLocation = async function(driver, element) {
+const clickByLocation = async function(driver, element) {
   let rect = await element.getRect();
   await driver.actions().move({
     origin: element,
@@ -44,7 +49,7 @@ var clickByLocation = async function(driver, element) {
  * Natigates to the specified url if the browser hasn't
  * Make sure the url ends with '/' if it's homepage
  */
-var navigatePage = async function(driver, url) {
+const navigatePage = async function(driver, url) {
   let currUrl = await driver.getCurrentUrl();
   if (currUrl != url) {
     await driver.get(url);
@@ -56,7 +61,7 @@ var navigatePage = async function(driver, url) {
  * Useful for message testing
  */
 
-var generateMessage = function() {
+const generateMessage = function() {
   let num = Math.floor(Math.random() * (999999 - 100000) + 100000);
   return 'Test Message ' + num;
 }
@@ -64,7 +69,7 @@ var generateMessage = function() {
 /**
  * Generate URL
  */
-var getUrl = function(route) {
+const getUrl = function(route) {
   if (!route) {
     return URL
   }
@@ -74,7 +79,7 @@ var getUrl = function(route) {
 /**
  * Check if element exists, using xpath
  */
-var checkIfElementExistsXpath = async function(driver, xpath) {
+const checkIfElementExistsXpath = async function(driver, xpath) {
   let elements = await driver.findElements(By.xpath(xpath));
   return elements.length > 0;
 }
@@ -82,7 +87,7 @@ var checkIfElementExistsXpath = async function(driver, xpath) {
 /**
  * Check if element exists, using css
  */
-var checkIfElementExistsCss = async function(driver, css) {
+const checkIfElementExistsCss = async function(driver, css) {
   let elements = await driver.findElements(By.css(css));
   return elements.length > 0;
 }
@@ -90,7 +95,7 @@ var checkIfElementExistsCss = async function(driver, css) {
 /**
  * Check if element exists, using classname
  */
-var checkIfElementExistsClassName = async function(driver, className) {
+const checkIfElementExistsClassName = async function(driver, className) {
   let elements = await driver.findElements(By.className(className));
   return elements.length > 0;
 }
@@ -99,7 +104,7 @@ var checkIfElementExistsClassName = async function(driver, className) {
  * More robust way of clearing inputs, use if clear() doesn't work
  */
 
-var clearInput = async function(element) {
+const clearInput = async function(element) {
   await element.sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
 }
 

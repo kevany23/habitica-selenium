@@ -5,6 +5,10 @@ const { navigatePage, getUrl, waitFunction,
 const { getGold, getHealth } = require('../util/common.js');
 const assert = require('assert');
 
+/**
+ * Test rewards, sepcifically the custom reward and the healing
+ * potion.
+ */
 var runRewardTests = async function(driver) {
   describe('Now Running tests on rewardTest.js', function() {
     this.timeout(10000);

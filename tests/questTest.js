@@ -5,6 +5,10 @@ const { navigatePage, waitFunction, getUrl, checkIfElementExistsCss,
   checkIfElementExistsXpath} = require('../util/util');
 const assert = require('assert');
 
+/**
+ * Test adding quest to party workflow.
+ * Note: your party cannot be already doing a quest.
+ */
 var runQuestTests = async function (driver) {
   describe('Quest tests in questTest.js', function () {
     this.timeout(20000);

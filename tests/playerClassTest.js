@@ -3,6 +3,9 @@ const { SeleniumServer } = require('selenium-webdriver/remote');
 const { waitFunction, getUrl, navigatePage } = require('../util/util');
 const assert = require('assert');
 
+/**
+ * Test somme class change related functionality.
+ */
 var runPlayerClassTests = async function(driver) {
   describe('Running tests on tavern chat', function() {
     this.timeout(10000);

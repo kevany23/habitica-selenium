@@ -3,6 +3,9 @@ const { SeleniumServer } = require('selenium-webdriver/remote');
 const { navigatePage, waitFunction, generateMessage, getUrl } = require('../util/util');
 const assert = require('assert');
 
+/**
+ * Test party functionality with the user's party.
+ */
 var runPartyTests = async function(driver) {
   describe('Party tests in partyTest.js', function() {
     this.timeout(12000);
